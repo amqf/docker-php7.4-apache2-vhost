@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  web:
+    container_name: dev.local
+    build: .
+    ports:
+      - "80:80"
+    volumes:
+      - ./src:/var/www/html
+      - ./apache/sites-available/vhost.conf:/etc/apache2/sites-available/000-default.conf
+    restart: always
+    networks:
+      - webnet
+
+networks:
+  webnet:
