@@ -4,6 +4,8 @@ services:
   web:
     container_name: dev.local
     build: .
+    environment:
+      - MYSQL_PASSWORD=password
     ports:
       - "80:80"
     volumes:
