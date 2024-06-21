@@ -2,10 +2,14 @@ version: '3.8'
 
 services:
   web:
-    container_name: dev.local
+    container_name: webserver
     build: .
     environment:
-      - MYSQL_PASSWORD=password
+      DB_HOST: ${DB_HOST}
+      DB_NAME: ${DB_NAME}
+      DB_USER: ${DB_USER}
+      DB_PASS: ${DB_PASS}
+      APACHE_FROM_DOCKER_ENV_VAR: ${APACHE_FROM_DOCKER_ENV_VAR}
     ports:
       - "80:80"
     volumes:
@@ -13,7 +17,27 @@ services:
       - ./apache/sites-available/vhost.conf:/etc/apache2/sites-available/000-default.conf
     restart: always
     networks:
-      - webnet
+      - subnetwork
+
+  database:
+    container_name: database
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASS}
+      MYSQL_DATABASE: ${DB_NAME}
+      MYSQL_USER: ${DB_NAME}
+      MYSQL_PASSWORD: ${DB_PASS}
+    networks:
+      - subnetwork
+    ports:
+      - "3306:3306"
+    volumes:
+      - database:/var/lib/mysql
+      - ./initdb:/docker-entrypoint-initdb.d
+
+volumes:
+  database:
 
 networks:
-  webnet:
+ subnetwork:
+  driver: bridge

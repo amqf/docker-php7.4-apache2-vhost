@@ -1,5 +1,5 @@
 # Usar a imagem oficial do PHP com Apache
-FROM php:7.4-apache
+FROM php:8.3-apache
 
 # ENV MYSQL_PASSWORD=${MYSQL_PASSWORD}
 

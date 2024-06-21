@@ -1,0 +1,6 @@
+DB_HOST=database
+DB_NAME=database
+DB_USER=
+DB_ROOT_PASS=
+DB_PASS=
+APACHE_FROM_DOCKER_ENV_VAR=xablau
