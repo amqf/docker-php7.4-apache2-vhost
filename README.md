@@ -7,3 +7,5 @@ Porque `container_name` tem valor `dev.local`, então no `/etc/hosts` configure:
 ```
 127.0.0.1 dev.local
 ```
+
+![alt text](image.png)
